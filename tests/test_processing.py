@@ -58,4 +58,4 @@ def test_filter_by_state(value, expected):
     ],
 )
 def test_sort_by_date(value, expected):
-    sort_by_date(value) == expected
+     assert sort_by_date(value) == expected

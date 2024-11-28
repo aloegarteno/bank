@@ -23,11 +23,11 @@ def test_mask_account_card(value, expected):
     [
         ("2024-03-11T02:26:18.671407", "11.03.2024"),
         ("2024-12-15", "15.12.2024"),
-        ("2024.01.22", "22.01.24"),
+        ("2024.01.22", "22.01.2024"),
         ("", "Неверная дата"),
     ],
 )
 
 
 def test_get_date(value, expected):
-    get_date(value) == expected
+    assert get_date(value) == expected
