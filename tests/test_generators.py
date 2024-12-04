@@ -1,3 +1,5 @@
+import pytest
+
 from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
@@ -15,14 +17,22 @@ def test_transaction_descriptions(transactions_list, operation_descriptions):
     assert list(transaction_descriptions(transactions_list)) == operation_descriptions
 
 
-def test_card_number_generator_min():
-    generator = card_number_generator(1, 4)
-    assert next(generator) == "0000 0000 0000 0001"
-    assert next(generator) == "0000 0000 0000 0002"
-    assert next(generator) == "0000 0000 0000 0003"
+@pytest.mark.parametrize(
+    "value_1, value_2,  expected",
+    [(1, 4, "0000 0000 0000 0001"), (2, 4, "0000 0000 0000 0002"), (3, 4, "0000 0000 0000 0003")],
+)
+def test_card_number_generator_min(value_1, value_2, expected):
+    generator = card_number_generator(value_1, value_2)
+    assert next(generator) == expected
 
 
-def test_card_number_generator_max():
-    generator = card_number_generator(9999999999999997, 9999999999999999)
-    assert next(generator) == "9999 9999 9999 9997"
-    assert next(generator) == "9999 9999 9999 9998"
+@pytest.mark.parametrize(
+    "value_1, value_2,  expected",
+    [
+        (9999999999999997, 9999999999999999, "9999 9999 9999 9997"),
+        (9999999999999998, 9999999999999999, "9999 9999 9999 9998"),
+    ],
+)
+def test_card_number_generator_max(value_1, value_2, expected):
+    generator = card_number_generator(value_1, value_2)
+    assert next(generator) == expected
