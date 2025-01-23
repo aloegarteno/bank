@@ -1,4 +1,4 @@
-from src.masks import get_mask_account, get_mask_card_number
+from masks import get_mask_account, get_mask_card_number
 
 
 def mask_account_card(card_info: str) -> str:
@@ -11,7 +11,4 @@ def mask_account_card(card_info: str) -> str:
 
 def get_date(date: str) -> str:
     """Принимает строку с датой и возвращает ее в формате ДД.ММ.ГГГГ"""
-    if len(date) != 0:
-        return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
-    else:
-        return "Неверная дата"
+    return f"{date[8:10]}.{date[5:7]}.{date[0:4]}"
